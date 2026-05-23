@@ -1,0 +1,42 @@
+# MiMoGuard Configuration
+mimo:
+  api_url: https://api.xiaomimimo.com/v1
+  model_primary: mimo-v2.5-pro
+  model_secondary: mimo-v2.5
+  max_tokens_per_request: 32000
+  requests_per_minute: 60
+
+agents:
+  orchestrator:
+    enabled: true
+    concurrency: 5
+    event_queue_size: 10000
+  swap:
+    enabled: true
+    dexes: [uniswap, sushiswap, pancakeswap]
+    max_slippage: 0.05
+  auditor:
+    enabled: true
+    passes: 4
+    min_confidence: 0.85
+  threat:
+    enabled: true
+    alert_threshold: 0.80
+    monitor_interval: 5
+  advisor:
+    enabled: true
+
+chains:
+  ethereum:
+    rpc_url: ${ETH_RPC_URL}
+    chain_id: 1
+  base:
+    rpc_url: ${BASE_RPC_URL}
+    chain_id: 8453
+  arbitrum:
+    rpc_url: ${ARB_RPC_URL}
+    chain_id: 42161
+
+logging:
+  level: INFO
+  file: logs/mimoguard.log
